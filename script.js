@@ -27,29 +27,93 @@ function book(author, title, pages, read) {
 }
 
 function addBook() {
-
+    const author = document.getElementById('author').value;
+    const title = document.getElementById('title').value;
+    const pages = document.getElementById('pages').value;
+    const read = document.getElementById('read').checked;
+    const newBook = new book(author, title, pages, read);
+    library.push(newBook);
 }
 
 const shelf = document.querySelector('.bookshelf');
 
-for (const item of library) {
-    const bookInfo = document.createElement('div');
-    bookInfo.className = 'book';
-
-    const author = document.createElement('div');
-    author.className = 'author';
-    const title = document.createElement('div');
-    title.className = 'title';
-    const pages = document.createElement('div');
-    pages.className = 'pages';
-    const read = document.createElement('div');
-    read.className = 'read';
+// display the bookshelf
+function display() {
+    for (const item of library) {
+        const bookInfo = document.createElement('div');
+        bookInfo.className = 'book';
     
-    bookInfo.append(author, title, pages, read);
-    shelf.appendChild(bookInfo);
-
-    author.textContent = item.author;
-    title.textContent = item.title;
-    pages.textContent = item.pages;
-    read.textContent = item.read;
+        const author = document.createElement('div');
+        author.className = 'author';
+        const title = document.createElement('div');
+        title.className = 'title';
+        const pages = document.createElement('div');
+        pages.className = 'pages';
+        const read = document.createElement('div');
+        read.className = 'read';
+        
+        bookInfo.append(author, title, pages, read);
+        shelf.appendChild(bookInfo);
+    
+        author.textContent = item.author;
+        title.textContent = item.title;
+        pages.textContent = item.pages;
+        read.textContent = item.read;
+    }
 }
+
+// clear the bookshelf
+function clear() {
+    const books = document.querySelectorAll('.book');
+    for (const item of books) {
+        shelf.removeChild(item);
+    }
+}
+
+const openModalButtons = document.querySelectorAll('[data-modal-target]');
+const closeModalButtons = document.querySelectorAll('[data-close-button]');
+const overlay = document.getElementById('overlay');
+
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget);
+        openModal(modal);
+    })
+})
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        closeModal(modal);
+    })
+})
+
+overlay.addEventListener('click', () => {
+    const modals = document.querySelectorAll('.modal.active');
+    modals.forEach(modal => {
+        closeModal(modal);
+    })
+})
+
+function openModal(modal) {
+    if (modal == null) return;
+    modal.classList.add('active');
+    overlay.classList.add('active');
+}
+
+function closeModal(modal) {
+    if (modal == null) return;
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
+const addBookBtn = document.querySelector('.add-book');
+addBookBtn.addEventListener('click', () => {
+    const modal = addBookBtn.closest('.modal');
+    closeModal(modal);
+    addBook();
+    clear();
+    display();
+});
+
+display();
