@@ -1,23 +1,7 @@
-let library = [
-    {
-        author: 'Mirantee',
-        title: 'Javascript is FUN',
-        pages: 50,
-        read: true,
-    },
-    {
-        author: 'AYAYA',
-        title: 'THE WEEB WAY',
-        pages: 69,
-        read: false,
-    },
-    {
-        author: 'Billy',
-        title: 'Gachi rule the WORLD',
-        pages: 6969,
-        read: true,
-    },
-];
+let library = [];
+library.push(new book('Mirantee', 'Javascript is FUN', 50, true));
+library.push(new book('AYAYA', 'AYAYA', 69, false));
+library.push(new book('Billy', 'Gachi rule the WORLD', 6969, true));
 
 function book(author, title, pages, read) {
     this.author = author,
@@ -26,8 +10,8 @@ function book(author, title, pages, read) {
     this.read = read;
 }
 
-book.prototype.read = function() {
-
+book.prototype.readStatus = function() {
+    this.read = !this.read;
 }
 
 function addBook() {
@@ -35,9 +19,11 @@ function addBook() {
     const title = document.getElementById('title').value;
     const pages = document.getElementById('pages').value;
     const read = document.getElementById('read').checked;
+
     const newBook = new book(author, title, pages, read);
     library.push(newBook);
 }
+
 const shelf = document.querySelector('.bookshelf');
 
 // display the bookshelf
@@ -73,8 +59,14 @@ function display() {
 
         // delete book
         deleteBtn.addEventListener('click', () => {
-            console.log(deleteBtn.dataset.index);
             library.splice(deleteBtn.dataset.index, 1);
+            clear();
+            display();
+        })
+
+        // change read status
+        readBtn.addEventListener('click', () => {
+            library[deleteBtn.dataset.index].readStatus();
             clear();
             display();
         })
