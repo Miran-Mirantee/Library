@@ -1,11 +1,20 @@
 body {
-
+    margin: 0;
 }
 
 .bookshelf {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     margin-top: 16px;
+    justify-content: center;
+}
+
+.book {
+    padding: 16px;
+    border: 2px solid black;
+    width: 250px;
+    height: 100px;
 }
 
 .modal {

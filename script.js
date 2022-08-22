@@ -51,14 +51,20 @@ function display() {
         pages.className = 'pages';
         const read = document.createElement('div');
         read.className = 'read';
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn';
+        const readBtn = document.createElement('button');
+        readBtn.className = 'btn';
         
-        bookInfo.append(author, title, pages, read);
+        bookInfo.append(author, title, pages, read, deleteBtn, readBtn);
         shelf.appendChild(bookInfo);
     
-        author.textContent = item.author;
-        title.textContent = item.title;
-        pages.textContent = item.pages;
-        read.textContent = item.read;
+        author.textContent = `Author: ${item.author}`;
+        title.textContent = `Title: ${item.title}`;
+        pages.textContent = `Pages: ${item.pages}`;
+        read.textContent = `Read: ${item.read}`;
+        deleteBtn.textContent =  `Delete`;
+        readBtn.textContent = `Read`;
     }
 }
 
