@@ -3,19 +3,19 @@ let library = [
         author: 'Mirantee',
         title: 'Javascript is FUN',
         pages: 50,
-        read: true
+        read: true,
     },
     {
         author: 'AYAYA',
         title: 'THE WEEB WAY',
         pages: 69,
-        read: false
+        read: false,
     },
     {
         author: 'Billy',
         title: 'Gachi rule the WORLD',
         pages: 6969,
-        read: true
+        read: true,
     },
 ];
 
@@ -26,6 +26,10 @@ function book(author, title, pages, read) {
     this.read = read;
 }
 
+book.prototype.read = function() {
+
+}
+
 function addBook() {
     const author = document.getElementById('author').value;
     const title = document.getElementById('title').value;
@@ -34,11 +38,11 @@ function addBook() {
     const newBook = new book(author, title, pages, read);
     library.push(newBook);
 }
-
 const shelf = document.querySelector('.bookshelf');
 
 // display the bookshelf
 function display() {
+    let index = 0;
     for (const item of library) {
         const bookInfo = document.createElement('div');
         bookInfo.className = 'book';
@@ -52,9 +56,10 @@ function display() {
         const read = document.createElement('div');
         read.className = 'read';
         const deleteBtn = document.createElement('button');
-        deleteBtn.className = 'btn';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.setAttribute('data-index', index++);
         const readBtn = document.createElement('button');
-        readBtn.className = 'btn';
+        readBtn.classList.add('read-btn');
         
         bookInfo.append(author, title, pages, read, deleteBtn, readBtn);
         shelf.appendChild(bookInfo);
@@ -65,6 +70,14 @@ function display() {
         read.textContent = `Read: ${item.read}`;
         deleteBtn.textContent =  `Delete`;
         readBtn.textContent = `Read`;
+
+        // delete book
+        deleteBtn.addEventListener('click', () => {
+            console.log(deleteBtn.dataset.index);
+            library.splice(deleteBtn.dataset.index, 1);
+            clear();
+            display();
+        })
     }
 }
 
@@ -113,7 +126,8 @@ function closeModal(modal) {
     overlay.classList.remove('active');
 }
 
-const addBookBtn = document.querySelector('.add-book');
+// add book
+const addBookBtn = document.querySelector('.add-book-btn');
 addBookBtn.addEventListener('click', () => {
     const modal = addBookBtn.closest('.modal');
     closeModal(modal);
