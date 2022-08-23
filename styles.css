@@ -39,6 +39,27 @@ input:focus {
     background-color: #e9d5ff;
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 125px;
+    width: 100vw;
+    background-color: #6d28d9;
+    margin-bottom: 32px;
+    box-shadow: 0px 0px 7px 3px #e879f9;
+}
+
+.header > div {
+    color: #e9d5ff;
+    font-size: 56px;
+    margin-left: 16px;
+}
+
+.header > div + div {
+    font-size: 24px;
+}
+
 .bookshelf {
     display: flex;
     flex-wrap: wrap;
