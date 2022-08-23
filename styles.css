@@ -1,20 +1,86 @@
 body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ede9fe;
+}
+
+button {
+    background-color: #6d28d9;
+    border-style: none;
+    border-radius: 10px;
+    padding: 7px 14px;
+    color: #ede9fe;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #8543ee;
+}
+
+button:active {
+    background-color: #e879f9;
+}
+
+input {
+    font-size: 20px;
+    outline: none;
+    border-style: none;
+    border-radius: 8px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+}
+
+input:focus {
+    /* border-color: #e879f9; */
+    background-color: #e9d5ff;
 }
 
 .bookshelf {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 24px;
     margin-top: 16px;
     justify-content: center;
 }
 
 .book {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 16px;
-    border: 2px solid black;
+    border-radius: 8px;
+    color: #ede9fe;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #8b5cf6;
     width: 250px;
-    height: 100px;
+    height: 150px;
+    box-shadow: 
+        0px 0px 0px 2px white,
+        0px 0px 0px 8px #c4b5fd;
+    }
+
+.book-upper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.book-lower {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+}
+
+[data-modal-target] {
+    width: 100px;
+    padding: 8px;
+    margin: 16px;
 }
 
 .modal {
@@ -23,17 +89,19 @@ body {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
-    border: 2px solid black;
     border-radius: 16px;
     z-index: 10;
-    background-color: white;
-    width: 500px;
+    border: 4px solid #e9d5ff;
+    background-color: #8b5cf6;
+    color: #ede9fe;
+    font-size: 16px;
+    font-weight: bold;
+    width: 350px;
     max-width: 80%;
 }
 
 .modal.active {
     transform: translate(-50%, -50%) scale(1);
-
 }
 
 .modal-header {
@@ -41,7 +109,8 @@ body {
     padding: 10px 15px;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid black;
+    background-color: #c084fc;
+    border-radius: 12px 12px 0px 0px;
 }
 
 .modal-header .title {
@@ -61,8 +130,9 @@ body {
 .modal-body {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 10px 15px;
-    gap: 5px;
+    gap: 8px;
 }
 
 #overlay {
@@ -72,7 +142,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(195, 180, 253, 0.5);
     opacity: 0;
     pointer-events: none;
 }

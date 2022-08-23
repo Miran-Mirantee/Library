@@ -32,6 +32,10 @@ function display() {
     for (const item of library) {
         const bookInfo = document.createElement('div');
         bookInfo.className = 'book';
+        const bookInfoUpper = document.createElement('div');
+        bookInfoUpper.className = 'book-upper';
+        const bookInfoLower = document.createElement('div');
+        bookInfoLower.className = 'book-lower';
     
         const author = document.createElement('div');
         author.className = 'author';
@@ -47,7 +51,9 @@ function display() {
         const readBtn = document.createElement('button');
         readBtn.classList.add('read-btn');
         
-        bookInfo.append(author, title, pages, read, deleteBtn, readBtn);
+        bookInfo.append(bookInfoUpper, bookInfoLower);
+        bookInfoUpper.append(author, title, pages, read);
+        bookInfoLower.append(deleteBtn, readBtn);
         shelf.appendChild(bookInfo);
     
         author.textContent = `Author: ${item.author}`;
@@ -128,4 +134,5 @@ addBookBtn.addEventListener('click', () => {
     display();
 });
 
+// display all book at beginning
 display();
