@@ -1,7 +1,7 @@
 let library = [];
 library.push(new book('Mirantee', 'Javascript is FUN', 50, true));
 library.push(new book('AYAYA', 'AYAYA', 69, false));
-library.push(new book('Billy', 'Gachi rule the WORLD', 6969, true));
+library.push(new book('Billy', 'Gachi rule the WORLD', 123, true));
 
 function book(author, title, pages, read) {
     this.author = author,
@@ -15,13 +15,23 @@ book.prototype.readStatus = function() {
 }
 
 function addBook() {
-    const author = document.getElementById('author').value;
-    const title = document.getElementById('title').value;
-    const pages = document.getElementById('pages').value;
-    const read = document.getElementById('read').checked;
-
-    const newBook = new book(author, title, pages, read);
-    library.push(newBook);
+    const author = document.getElementById('author');
+    const title = document.getElementById('title');
+    const pages = document.getElementById('pages');
+    const read = document.getElementById('read');
+    const newBook = new book(author.value, title.value, pages.value, read.checked);
+    if (author.checkValidity() && 
+        title.checkValidity() &&
+        pages.checkValidity()) {
+        library.push(newBook);
+        author.value = '';
+        title.value = '';
+        pages.value = '';
+        read.checked = false;    
+        
+        return true;
+    }
+    return false;
 }
 
 const shelf = document.querySelector('.bookshelf');
@@ -128,8 +138,8 @@ function closeModal(modal) {
 const addBookBtn = document.querySelector('.add-book-btn');
 addBookBtn.addEventListener('click', () => {
     const modal = addBookBtn.closest('.modal');
-    closeModal(modal);
-    addBook();
+    if (addBook())
+        closeModal(modal);
     clear();
     display();
 });
