@@ -1,14 +1,23 @@
+class book {
+    constructor(author, title, pages, read) {
+        this.author = author,
+        this.title = title,
+        this.pages = pages,
+        this.read = read;
+    }
+}
+
 let library = [];
 library.push(new book('Mirantee', 'Javascript is FUN', 50, true));
 library.push(new book('AYAYA', 'AYAYA', 69, false));
 library.push(new book('Billy', 'Gachi rule the WORLD', 123, true));
 
-function book(author, title, pages, read) {
-    this.author = author,
-    this.title = title,
-    this.pages = pages,
-    this.read = read;
-}
+// function book(author, title, pages, read) {
+//     this.author = author,
+//     this.title = title,
+//     this.pages = pages,
+//     this.read = read;
+// }
 
 book.prototype.readStatus = function() {
     this.read = !this.read;
